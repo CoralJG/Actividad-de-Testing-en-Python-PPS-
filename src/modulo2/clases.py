@@ -1,0 +1,1 @@
+# Clases auxiliares de la función principal 'esPalindromo'
