@@ -1,36 +1,29 @@
-
 r""""
 Programa que determina si una cadena proporcionada por el 
 usuario es palíndroma. Para ello se preguntará por teclado al 
 usuario tantas veces como quiera hasta que escriba la palabra salir. 
 
-Ultima Modificación. 17/11/2025
+Ultima Modificación. 22/11/2025
 Autor. Coral Jácome García
-Dependencias. Unicodedata
+Dependencias. -
 
 """
-import unicodedata
 
-def esPalindromo(cadena):
+# Importamos la función esPalindromo desde el módulo1
+from modulo1.funciones import esPalindromo
+# Importamos la clase GestorPalindromos desde el módulo2
+from modulo2.clases import GestorPalindromos
+
+def main():
     """
-    Función que verifica si una cadena es palíndroma.
-    Ignora espacios, mayúsculas y tildes.
-
+    Función principal que crea un gestor de palíndromos y ejecuta el programa.
     """
-    # Convertir la cadena a minúsculas y eliminar caracteres no alfabéticos
-    cadena_limpia = ''.join(char.lower() for char in cadena if char.isalnum())
-    # Comparar la cadena limpia con su reverso
-    return cadena_limpia == cadena_limpia[::-1]
+    # Se crea una instancia de GestorPalindromos pasando la función esPalindromo
+    gestor = GestorPalindromos(esPalindromo)
+    # Se ejecuta el método que inicia la interacción con el usuario
+    gestor.ejecutar()
 
-# Proteger para que no se ejecute en tests
+# Si se ejecuta el programa directamente (python .\charfun.py), se llama a main()
 if __name__ == "__main__":
-    while True:
-        frase = input("Introduce una frase (o escribe 'salir' para terminar): ")
-        if frase.lower() == "salir":
-            print("Programa finalizado.")
-        else:
-            # Comprobar si es palíndromo
-            if esPalindromo(frase):
-                print("La frase es palíndroma.")
-            else:
-                print("La frase no es palíndroma.")
+    main()
+
