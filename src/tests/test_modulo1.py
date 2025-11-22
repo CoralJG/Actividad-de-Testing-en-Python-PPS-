@@ -22,22 +22,34 @@ class TestEsPalindromo(unittest.TestCase):
             ("Coral es la mejor", False),
         ]
 
+    # Test que recorre todos los casos definidos, usando subTest para identificar cada uno individualmente
+    # Controla excepciones para que cualquier error en la función se refleje en la prueba
     def test_es_palindromo(self):
         # Testea cada cadena y compara el resultado con el esperado
         for cadena, esperado in self.casos_prueba:
             with self.subTest(cadena=cadena):
-                self.assertEqual(esPalindromo(cadena), esperado)
+                try:
+                    resultado = esPalindromo(cadena)  # Invoca la función bajo prueba
+                    self.assertEqual(resultado, esperado)  # Verifica que el resultado coincida con lo esperado
+                except Exception as e:
+                    self.fail(f"La función lanzó una excepción inesperada: {e}")
 
+    # Test específico para cadenas largas, asegurando que la función maneje bien grandes volúmenes de datos
     def test_cadena_larga(self):
         # Crear cadena palíndroma muy larga
         base = "La ruta nos aportó otro paso natural"
         cadena_larga = base * 1000
-        self.assertTrue(esPalindromo(cadena_larga))
+        try:
+            self.assertTrue(esPalindromo(cadena_larga)) 
+        except Exception as e:
+            self.fail(f"La función lanzó una excepción inesperada: {e}")
         # Crear cadena no palíndroma muy larga
-        cadena_no_palindroma = "Coral" * 10000
-        self.assertFalse(esPalindromo(cadena_no_palindroma))
+        cadena_no_palindromo = "Coral" * 10000 
+        try:
+            self.assertFalse(esPalindromo(cadena_no_palindromo))
+        except Exception as e:
+            self.fail(f"La función lanzó una excepción inesperada: {e}")
+
 
 if __name__ == "__main__":
     unittest.main()
-
-
